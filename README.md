@@ -291,7 +291,7 @@ This is useful evidence in itself: the framework is capable of validating existi
 
 Low-K SA2 intersections were treated as the primary review group because comparable main- and side-street demand weakens the observed demand-based rationale for highly responsive side-street service.
 
-The initial screening identified **56 SA2 intersections with K ≤ 0.5 **, with only **7 intersections below approximately K = 0.2**.
+The initial screening identified **56 SA2 intersections with K ≤ 0.5**, with only **7 intersections below approximately K = 0.2**.
 
 K < 0.2 was selected as an empirical screening threshold to identify SA2 intersections with unusually balanced main- and side-street demand. it acts as a conservative criterion for identifying intersections warranting further review. Supplementary time-of-day plots support this threshold visually, showing a noticeable decline in main-street dominance as K approaches 0.2
 
