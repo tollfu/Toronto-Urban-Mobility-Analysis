@@ -121,18 +121,20 @@ Overall, the analysis identifies several high-demand intersections where observe
 
 > Does the observed demand pattern at an intersection appear consistent with the logic of its existing signal control mode?
 
+
+
 Toronto operates intersections under several control modes, including **Fixed Time (FT), Semi-Actuated Type 1 (SA1), Semi-Actuated Type 2 (SA2), and Semi-Actuated Pedestrian (SAP)**. **Semi-Actuated Vehicle (SAV) and Pedestrian Actuated (PED)** will be excluded from the scope of this study due to lack of joint pedestrian/vehicle representation.
 
-### 🚦 Toronto Traffic Signal Types
+### Toronto Traffic Signal Types
 
 | Type | How it works | Vehicle Detection | Pedestrian Activation |
 |------|--------------|------------------|----------------------|
 | **FT** | Runs on a fixed cycle regardless of demand | ❌ | ❌ |
 | **SAP** | Side street activates when either a vehicle or pedestrian is detected | ✅ | ✅ |
-| **SA1** | Vehicle phases may be actuated, while pedestrian phases remain on recall | ✅ | Generally ❌ |
+| **SA1** | Vehicle phases may be actuated, while pedestrian phases remain on recall | ✅ | ❌ |
 | **SA2** | Side-street timing responds independently to vehicle and pedestrian demand | ✅ | ✅ |
-| **SAV** | Side street is activated and extended by vehicle demand only | ✅ | ❌ |
-| **PED** | Crossing is activated by a pedestrian pushbutton | — | ✅ |
+| **SAV** | No pedestrain crossings, side street is activated and extended by vehicle demand only | - | - |
+| **PED** | Midblock pedestrain signal, crossing is activated by a pedestrian pushbutton | - | - |
 
 Different modes provide different levels of demand responsiveness.
 
