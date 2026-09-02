@@ -65,7 +65,13 @@ Intersection coordinates and Toronto cycling-network geometries were converted i
 
 Because latitude/longitude coordinates are unsuitable for calculating distances directly, the spatial data were projected from geographic coordinates into an appropriate projected coordinate reference system before distance-based analysis.
 
-<img width="600" alt="high_bike_intersections" src="https://github.com/user-attachments/assets/14ecc330-d767-491d-92f4-4e15489073c3" />
+<p align="center">
+  <img 
+    width="600" 
+    alt="high_bike_intersections" 
+    src="https://github.com/user-attachments/assets/14ecc330-d767-491d-92f4-4e15489073c3"
+  />
+</p>
 
 ### 3. Identify infrastructure gaps
 
