@@ -257,8 +257,8 @@ The metrics are interpreted together rather than as a mechanical classification 
 | SA2          | High K                                                 | Strong main-street dominance is broadly consistent with SA2                                     |
 | FT / SA1     | Low K                                                  | Comparable demand supports regular service                                                      |
 | FT / SA1     | High K + persistent dominance                          | Actuation may deserve review                                                                    |
-| FT / SA1     | Above + strong vehicle/pedestrian synchronization      | SAP may deserve review                                                                          |
-| FT / SA1     | Above + weak/negative vehicle/pedestrian relationship  | SA2 may deserve review                                                                          |
+| FT / SA1     | High K + strong vehicle/pedestrian synchronization      | SAP may deserve review                                                                          |
+| FT / SA1     | High K + weak/negative vehicle/pedestrian relationship  | SA2 may deserve review                                                                          |
 | SAP          | Low K                                                  | Side service may no longer behave as strongly secondary; FT/SA1 review                          |
 | SAP          | High K + strong vehicle/pedestrian synchronization     | Observed demand is broadly consistent with SAP                                                  |
 | SAP          | High K + weak/negative vehicle/pedestrian relationship | Independent calls under SA2 may deserve review                                                  |
