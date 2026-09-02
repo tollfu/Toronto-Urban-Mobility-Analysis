@@ -277,9 +277,11 @@ Many SA2 intersections show clear main-street dominance, while many FT/SA1 inter
 
 This is useful evidence in itself: the framework is capable of validating existing operations rather than simply searching for anomalies.
 
-[INSERT EXAMPLE: FT/SA1 THAT CLEARLY MAKES SENSE]
-
-[INSERT EXAMPLE: SA2 THAT CLEARLY MAKES SENSE]
+| Location | Main Street | Side Street | Control Mode | K | Persistence | Side Vehicle–Pedestrian Overlap | Main–Side Correlation |
+|---|---|---|:---:|---:|---:|---:|---:|
+| Rusholme Rd / Lisgar St / Dundas St W | Dundas St W | Lisgar St | SA2 | 0.998 | 1.000  | -0.170 | 0.053 |
+| Bay St / St Mary St | BAY ST | ST MARY ST | FT | 0.809 | 1.000 | 0.797 | 0.825 |
+| Yonge St / Marlborough Ave / Price St | YONGE ST | PRICE ST | SA1 | 0.754 | 1.000 | 0.681 | -0.053 |
 
 ---
 
