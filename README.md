@@ -46,6 +46,7 @@ For each intersection, bicycle movements were aggregated across directions and o
 
 ```python
 intersection_d["bike_count"] = intersection_d["n_appr_bike"]+intersection_d["s_appr_bike"]+intersection_d["e_appr_bike"]+intersection_d["w_appr_bike"]
+
 intersection_bike = (
     intersection_d
     .groupby("location_name")["bike_count"]
