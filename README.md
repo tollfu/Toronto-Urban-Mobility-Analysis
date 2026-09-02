@@ -47,8 +47,9 @@ For each intersection, bicycle movements were aggregated across directions and o
 Intersections were then ranked based on bicycle demand.
 
 The analysis focuses on approximately the **top 20% of observed bicycle-demand intersections** as an initial high-demand screening group.
+<p align="center">
 <img width="635" height="132" alt="image" src="https://github.com/user-attachments/assets/9495e7a4-9a31-4aa0-858a-11cbc21307f1" />
-
+<p/>
 ### 2. Map the cycling network
 
 Intersection coordinates and Toronto cycling-network geometries were converted into GeoDataFrames.
