@@ -59,7 +59,7 @@ Because latitude/longitude coordinates are unsuitable for calculating distances 
 
 <p align="center">
   <img 
-    width="600" 
+    width="800" 
     alt="high_bike_intersections" 
     src="https://github.com/user-attachments/assets/14ecc330-d767-491d-92f4-4e15489073c3"
   />
@@ -73,7 +73,7 @@ A **400-metre screening radius** was used to distinguish intersections with near
 
 This threshold is a screening assumption rather than an engineering standard.
 
-<p align="center"><img width="600" alt="high_bike_intersections" src="https://github.com/user-attachments/assets/f17fb3f8-4796-4ba7-acb5-bd4f2e281c8a" />
+<p align="center"><img width="800" alt="high_bike_intersections" src="https://github.com/user-attachments/assets/f17fb3f8-4796-4ba7-acb5-bd4f2e281c8a" />
 </p>
 
 
