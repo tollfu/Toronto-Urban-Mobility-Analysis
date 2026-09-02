@@ -263,9 +263,7 @@ The metrics are interpreted together rather than as a mechanical classification 
 | SAP          | High K + strong vehicle/pedestrian synchronization     | Observed demand is broadly consistent with SAP                                                  |
 | SAP          | High K + weak/negative vehicle/pedestrian relationship | Independent calls under SA2 may deserve review                                                  |
 
-These rules intentionally leave many intersections without a recommendation.
-
-The purpose is to identify **strong exceptions**, not force every intersection into a different operating mode.
+These rules intentionally leave many intersections without a recommendation and identify **strong exceptions** without forcing every intersection into a different operating mode.
 
 ---
 
