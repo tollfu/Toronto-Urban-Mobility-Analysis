@@ -44,20 +44,10 @@ I therefore aggregated observations to create a comparable measure of bicycle de
 
 For each intersection, bicycle movements were aggregated across directions and observation periods to estimate average observed bicycle traffic per 15 minutes, as this is the timeframe for each obervation bin.
 
-```python
-intersection_d["bike_count"] = intersection_d["n_appr_bike"]+intersection_d["s_appr_bike"]+intersection_d["e_appr_bike"]+intersection_d["w_appr_bike"]
-
-intersection_bike = (
-    intersection_d
-    .groupby("location_name")["bike_count"]
-    .mean()
-    .reset_index(name="avg_15min_bike")
-)
-```
-
 Intersections were then ranked based on bicycle demand.
 
 The analysis focuses on approximately the **top 20% of observed bicycle-demand intersections** as an initial high-demand screening group.
+<img width="635" height="132" alt="image" src="https://github.com/user-attachments/assets/9495e7a4-9a31-4aa0-858a-11cbc21307f1" />
 
 ### 2. Map the cycling network
 
