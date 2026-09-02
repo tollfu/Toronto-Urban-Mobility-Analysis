@@ -92,7 +92,7 @@ This threshold is a screening assumption rather than an engineering standard.
 
 ## Results
 
-[INSERT NUMBER] high-bicycle-demand intersections were identified for further infrastructure review.
+43 high-bicycle-demand intersections were identified for further infrastructure review.
 
 The strongest candidates combine:
 
@@ -104,11 +104,10 @@ The strongest candidates combine:
 
 | Intersection     | Bicycle Demand | Distance to Cycling Infrastructure | Interpretation   |
 | ---------------- | -------------: | ---------------------------------: | ---------------- |
-| [Intersection 1] |            [X] |                              [X m] | [Interpretation] |
+| Spadina Ave / Dundas St W |            [X] |                              [X m] | [Interpretation] |
 | [Intersection 2] |            [X] |                              [X m] | [Interpretation] |
 | [Intersection 3] |            [X] |                              [X m] | [Interpretation] |
 
-[INSERT 1–2 DETAILED EXAMPLE MAPS]
 
 These locations should be interpreted as **candidates for infrastructure review, not automatic recommendations for bicycle-lane construction**.
 
