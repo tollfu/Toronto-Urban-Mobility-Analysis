@@ -81,7 +81,14 @@ A **400-metre screening radius** was used to distinguish intersections with near
 
 This threshold is a screening assumption rather than an engineering standard.
 
-[INSERT MAP OF HIGH-BIKE INTERSECTIONS WITHOUT NEARBY INFRASTRUCTURE]
+<p align="center">
+  <img 
+    width="600" 
+    alt="high_bike_intersections_distance" 
+    src="https://github.com/user-attachments/assets/bffd874d-c589-440b-bc6a-064a93cceae1"
+  />
+</p>
+
 
 ## Results
 
