@@ -155,6 +155,8 @@ Approximately **3,979 unique traffic-count intersections** were initially identi
 
 Traffic-count and signal datasets could not be matched perfectly because of differences in geographic coverage, coordinates, and street naming. Street names were cleaned and standardized where practical, while a small number of unresolved cases were excluded.
 
+At intersections with two differently named side streets, both approaches were treated as part of the same side-street axis when they shared the same directional orientation.
+
 ### Determining Main- and Side-Street Direction
 
 The traffic-count dataset reports movements geographically as north, south, east, and west, while signal operation at intersections depends on **main-street versus side-street demand**.
@@ -280,8 +282,8 @@ This is useful evidence in itself: the framework is capable of validating existi
 | Location | Main Street | Side Street | Control Mode | K | Persistence | Side Vehicle–Pedestrian Overlap | Main–Side Correlation |
 |---|---|---|:---:|---:|---:|---:|---:|
 | Rusholme Rd / Lisgar St / Dundas St W | Dundas St W | Lisgar St | SA2 | 0.998 | 1.000  | -0.170 | 0.053 |
-| Bay St / St Mary St | BAY ST | ST MARY ST | FT | 0.809 | 1.000 | 0.797 | 0.825 |
-| Yonge St / Marlborough Ave / Price St | YONGE ST | PRICE ST | SA1 | 0.754 | 1.000 | 0.681 | -0.053 |
+| Victoria Park Ave / McNicoll Ave | VICTORIA PARK AVE | MCNICOLL AVE | FT | 0.044 | 0.000 | 0.396 | 0.953 |
+| Burnhamthorpe Rd / Kipling Ave | KIPLING AVE | BURNHAMTHORPE RD | SA1 | 0.008 | 0.000 | 0.422 | 0.862 |
 
 ---
 
@@ -289,22 +291,19 @@ This is useful evidence in itself: the framework is capable of validating existi
 
 Low-K SA2 intersections were treated as the primary review group because comparable main- and side-street demand weakens the observed demand-based rationale for highly responsive side-street service.
 
-The initial screening identified **56 SA2 intersections with K ≤ [THRESHOLD]**, with only **7 intersections below approximately K = 0.2**.
+The initial screening identified **56 SA2 intersections with K ≤ 0.5 **, with only **7 intersections below approximately K = 0.2**.
 
-[INSERT SA2 K DISTRIBUTION]
+K < 0.2 was selected as an empirical screening threshold to identify SA2 intersections with unusually balanced main- and side-street demand. it acts as a conservative criterion for identifying intersections warranting further review. Supplementary time-of-day plots support this threshold visually, showing a noticeable decline in main-street dominance as K approaches 0.2
 
-[INSERT GOOD SA2 GRAPH]
 
-[INSERT LOW-K SA2 REVIEW CANDIDATE GRAPH]
-
-Example review candidates include:
+Review candidates include:
 
 * Wintermute Blvd / Bamburgh Crcl
 * Finch Ave E / Middlefield Rd
 * Lonsdale Rd / Avenue Rd
-* Gardiner Expy E Park Lawn Rd Ramp / Mimico Cr...
+* Gardiner Expy E Park Lawn Rd Ramp / Mimico Creek Trl / Park Lawn Rd
 * Kipling Ave / Belfield Rd
-* Fairview Mall / Fairview Mall Dr / Hwy 404...
+* Fairview Mall / Fairview Mall Dr / Hwy 404 S Fairview Mall Ramp / Hwy 404 S Ramp
 * DVP S Wynford Dr Ramp / Wynford Dr
 
 These results require particular caution because several candidates contain traffic counts from only one to three observation dates.
