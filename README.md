@@ -73,13 +73,9 @@ A **400-metre screening radius** was used to distinguish intersections with near
 
 This threshold is a screening assumption rather than an engineering standard.
 
-<p align="center">
-  <img 
-    width="600" 
-    alt="high_bike_intersections_distance" 
-    src="https://github.com/user-attachments/assets/bffd874d-c589-440b-bc6a-064a93cceae1"
-  />
+<p align="center"><img width="600" alt="high_bike_intersections" src="https://github.com/user-attachments/assets/f17fb3f8-4796-4ba7-acb5-bd4f2e281c8a" />
 </p>
+
 
 
 ## Results
