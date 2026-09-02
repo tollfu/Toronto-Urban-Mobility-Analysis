@@ -89,7 +89,8 @@ This threshold is a screening assumption rather than an engineering standard.
 The strongest candidates combine:
 
 * high observed bicycle demand;
-* relatively large distance from existing cycling infrastructure
+* relatively large distance from existing cycling infrastructure;
+* 
 
 ### Example Candidates
 
@@ -110,7 +111,7 @@ These locations should be interpreted as **candidates for infrastructure review,
 
 * **Isabella St / Church St** also observes high bicycle demand without nearby dedicated cycling infrastructure, but does not face the same streetcar constraint. This makes it a potentially stronger candidate for further assessment of bike-lane implementation.
 
-* Among intersections in the **top 20% of bicycle demand**, locations along **Kingston Rd** and **St Clair Ave W** are among the furthest from existing cycling infrastructure. While St Clair Ave W is constrained by streetcar infrastructure, Kingston Rd does not share this constraint, making it worthy of further investigation.
+* Among intersections in the **top 20% of bicycle demand**, locations along **Kingston Rd** and **St Clair Ave W** are among the furthest from existing cycling infrastructure. While bike-lane implementation is limited by street car infrastructure on St Clair Ave W, Kingston Rd does not share this constraint, making it worthy of further investigation.
 
 Overall, the analysis identifies several high-demand intersections where observed bicycle use is not matched by nearby dedicated infrastructure. These findings provide a data-driven checklist for further safety, feasibility, and network-connectivity assessment rather than definitive recommendations for bike-lane construction.
 
@@ -120,13 +121,22 @@ Overall, the analysis identifies several high-demand intersections where observe
 
 > Does the observed demand pattern at an intersection appear consistent with the logic of its existing signal control mode?
 
-Toronto operates intersections under several control modes, including **Fixed Time (FT), Semi-Actuated Type 1 (SA1), Semi-Actuated Type 2 (SA2), and Semi-Actuated Pedestrian (SAP)**.
+Toronto operates intersections under several control modes, including **Fixed Time (FT), Semi-Actuated Type 1 (SA1), Semi-Actuated Type 2 (SA2), and Semi-Actuated Pedestrian (SAP)**. **Semi-Actuated Vehicle (SAV) and Pedestrian Actuated (PED)** will be excluded from the scope of this study due to lack of joint pedestrian/vehicle representation.
+
+### 🚦 Toronto Traffic Signal Types
+
+| Type | How it works | Vehicle Detection | Pedestrian Activation |
+|------|--------------|------------------|----------------------|
+| **FT** | Runs on a fixed cycle regardless of demand | ❌ | ❌ |
+| **SAP** | Side street activates when either a vehicle or pedestrian is detected | ✅ | ✅ |
+| **SA1** | Vehicle phases may be actuated, while pedestrian phases remain on recall | ✅ | Generally ❌ |
+| **SA2** | Side-street timing responds independently to vehicle and pedestrian demand | ✅ | ✅ |
+| **SAV** | Side street is activated and extended by vehicle demand only | ✅ | ❌ |
+| **PED** | Crossing is activated by a pedestrian pushbutton | — | ✅ |
 
 Different modes provide different levels of demand responsiveness.
 
-Instead of attempting to calculate an "optimal" control mode, this analysis asks whether observed multimodal demand appears broadly consistent with the operational logic of the existing mode.
-
-The resulting framework is therefore a **citywide screening tool**, not a traffic-engineering optimization model.
+This analysis asks whether observed multimodal demand appears broadly consistent with the operational logic of the existing mode. Hence, the resulting framework is therefore a **citywide screening tool**, and not a traffic-engineering optimization model.
 
 ---
 
@@ -141,13 +151,13 @@ This analysis required combining several datasets that were not originally desig
 
 Approximately **3,979 unique traffic-count intersections** were initially identified.
 
-Traffic-count and signal datasets could not be matched perfectly because of differences in geographic coverage, coordinates, and street naming. Street names were cleaned and standardized where practical, while a small number of unresolved cases were excluded rather than forcing uncertain matches.
+Traffic-count and signal datasets could not be matched perfectly because of differences in geographic coverage, coordinates, and street naming. Street names were cleaned and standardized where practical, while a small number of unresolved cases were excluded.
 
 ### Determining Main- and Side-Street Direction
 
-The traffic-count dataset reports movements geographically as north, south, east, and west, while signal operation depends on **main-street versus side-street demand**.
+The traffic-count dataset reports movements geographically as north, south, east, and west, while signal operation at intersections depends on **main-street versus side-street demand**.
 
-To bridge these representations, I developed a geometric orientation procedure:
+To bridge these interpretations, I developed a geometric orientation procedure:
 
 1. Match each signal's side-street name to Toronto Centreline data.
 2. Identify the centreline segment closest to the intersection.
@@ -163,7 +173,7 @@ Approximately 140 ambiguous or incorrectly classified cases were identified duri
 
 # Signal Screening Metrics
 
-Five complementary metrics describe the observed demand pattern.
+Four complementary metrics describe the observed demand pattern.
 
 ## 1. Main-Street Dominance Index (K)
 
@@ -211,21 +221,8 @@ Therefore:
 
 ---
 
-## 3. Side-Street Vehicle Variability
 
-Side-street demand variability is measured using the coefficient of variation:
-
-```text
-CV = Standard Deviation of Side Demand / Mean Side Demand
-```
-
-Higher CV indicates greater variation in side-street traffic relative to its average level.
-
-This metric provides supporting evidence when considering whether demand-responsive control could exploit variations in side-street demand. It is not treated as a standalone conversion criterion.
-
----
-
-## 4. Vehicle-Pedestrian Temporal Correlation
+## 3. Vehicle-Pedestrian Temporal Correlation
 
 Pearson correlation is calculated between side-street vehicle and pedestrian demand across observed time-of-day bins.
 
@@ -237,7 +234,7 @@ This metric helps distinguish situations where vehicle and pedestrian calls may 
 
 ---
 
-## 5. Main-Side Vehicle Temporal Correlation
+## 4. Main-Side Vehicle Temporal Correlation
 
 Correlation between main- and side-street vehicle demand measures whether both approaches follow similar time-of-day patterns.
 
