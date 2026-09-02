@@ -2,368 +2,487 @@
 
 ## Overview
 
-This project uses City of Toronto open data to answer two questions:
+This project uses City of Toronto open transportation data to identify opportunities for improving urban mobility infrastructure and traffic operations. Instead of attempting to optimize the entire transportation network, the project focuses on two practical questions:
 
-1. Which intersections have high observed bicycle traffic but no cycling infrastructure nearby?
-2. Do observed vehicle and pedestrian demand patterns appear consistent with each intersection's existing traffic-signal control mode?
+1. **Cycling Infrastructure:** Which intersections experience high bicycle traffic but lack nearby cycling infrastructure and may deserve further review?
+2. **Traffic Signal Operations:** Do observed traffic patterns appear consistent with the logic of each intersection's existing signal control mode, and which unusual intersections deserve engineering review?
 
-I built two screening tools rather than attempting to prescribe infrastructure or signal changes. The outputs identify locations that may deserve closer engineering review.
+The project combines multimodal traffic counts, Toronto's cycling network, traffic signal data, street centreline geometry, geospatial analysis, and time-of-day demand patterns.
 
+The objective is not to prescribe infrastructure or signal changes directly. Instead, the analysis develops **screening frameworks that can help prioritize locations for more detailed engineering assessment.**
 
-## Project at a glance
-
-| Analysis | Starting point | Screening output |
-|---|---:|---:|
-| Cycling infrastructure | 3,979 traffic-count intersections | 43 high-bike-demand intersections without cycling infrastructure within 400 m |
-| Signal operations | Matched traffic counts, signal records, and street geometry | A small set of unusual FT, SA1, SA2, and SAP intersections for engineering review |
-
-> The results are screening candidates, not recommendations to construct a bike lane or convert a signal.
 
 ---
 
-## Part 1: Cycling infrastructure screening
+# Part I: Cycling Infrastructure Screening
 
-### Question
+## Question
 
-> Where does observed bicycle demand appear high relative to the surrounding cycling infrastructure?
+> Which high-bicycle-demand intersections currently lack nearby cycling infrastructure?
 
-### Data and demand measure
+A high number of cyclists at an intersection does not by itself establish that a new bicycle lane should be constructed. Road geometry, safety history, network connectivity, available right-of-way, parking, construction costs, and other factors would also need to be considered.
 
-The Multimodal Intersection Turning Movement Counts dataset records bicycle, pedestrian, and vehicle movements in 15-minute intervals. All 335,566 cleaned observations used here represent 15-minute count intervals, but the number of observations per intersection varies substantially.
+However, bicycle traffic counts can provide a useful **demand-based screening mechanism** for identifying locations where existing cycling infrastructure may not align with observed usage.
 
-To avoid favoring intersections that were counted more often, I calculated total bicycle approaches in each interval and then took the mean for each location:
+## Data
 
-$$
-\text{Average 15-minute bicycle demand}_i
-=
-\operatorname{mean}_t(N_{it}+S_{it}+E_{it}+W_{it})
-$$
+The analysis combines:
 
-Across 3,979 intersections, the distribution was strongly right-skewed. The 80th-percentile value was **6.78125 bicycles per 15-minute interval**, which I used to define the initial high-demand group.
+* **Multimodal Intersection Turning Movement Counts** 
+* **Toronto Cycling Network**
+* Intersection coordinates and geospatial information
 
-This percentile is a practical screening choice, not an engineering standard.
+The traffic-count dataset contains 15-minute observations of vehicle, pedestrian, and bicycle movements through Toronto intersections.
 
-### Geospatial screening
+Because intersections were observed a different number of times, ranging from relatively small samples to hundreds of observations, raw total bicycle counts would disproportionately favor heavily sampled intersections.
 
-I converted the intersection coordinates and Toronto Cycling Network into GeoDataFrames. The layers were projected from EPSG:4326 to EPSG:3857 before distance calculations so that buffers and nearest-network distances could be measured in metres.
+I therefore aggregated observations to create a comparable measure of bicycle demand for each location.
 
-For each high-demand intersection, I then:
+## Methodology
 
-1. created a 400 m buffer;
-2. tested whether any cycling-network geometry intersected that buffer; and
-3. calculated the distance to the nearest cycling-network segment for uncovered locations.
+### 1. Estimate bicycle demand
 
-The **400 m radius is a screening assumption**, not a claim that every intersection beyond this distance requires new infrastructure.
+For each intersection, bicycle movements were aggregated across directions and observation periods to estimate average observed bicycle traffic.
 
-[Insert citywide map: high-bike intersections and cycling network]
+```python
+intersection_d["bike_count"] = intersection_d["n_appr_bike"]+intersection_d["s_appr_bike"]+intersection_d["e_appr_bike"]+intersection_d["w_appr_bike"]
+intersection_bike = (
+    intersection_d
+    .groupby("location_name")["bike_count"]
+    .mean()
+    .reset_index(name="avg_15min_bike")
+)
+```
 
-### Results
+Intersections were then ranked based on bicycle demand.
 
-The screen identified **43 high-bike-demand intersections without cycling infrastructure within 400 m**.
+The analysis focuses on approximately the **top 20% of observed bicycle-demand intersections** as an initial high-demand screening group.
 
-The most useful priority view combines two dimensions:
+### 2. Map the cycling network
 
-- marker size: average observed bicycle demand;
-- marker colour: distance to the nearest cycling-network segment.
+Intersection coordinates and Toronto cycling-network geometries were converted into GeoDataFrames.
 
-[Insert map: High-Bike Intersections by Demand and Distance to Nearest Bike Lane]
+Because latitude/longitude coordinates are unsuitable for calculating distances directly, the spatial data were projected from geographic coordinates into an appropriate projected coordinate reference system before distance-based analysis.
 
-Examples from the high-demand group include:
+[INSERT MAP OF INTERSECTIONS + CYCLING NETWORK]
 
-| Intersection | Avg. bicycles per 15 min | Nearest cycling infrastructure |
-|---|---:|---:|
-| Spadina Ave / Dundas St W | 48.98 | 485.59 m |
-| Spadina Ave / Baldwin St (North) | 37.41 | 442.60 m |
-| Spadina Ave / St Andrew St | 36.59 | 486.53 m |
-| Queen St W / Lisgar St | 23.25 | 407.81 m |
-| Queen St E / Broadview Ave | 23.10 | 516.12 m |
+### 3. Identify infrastructure gaps
 
-Distance reveals a different set of potential network gaps. For example, Kingston Rd / Scarborough Rd was approximately **937.82 m** from the nearest mapped cycling infrastructure, although its observed bicycle demand was much lower than the Spadina candidates.
+For each high-bicycle-demand intersection, the analysis measures proximity to existing cycling infrastructure.
 
-This is why the framework retains both demand and distance instead of collapsing them into a single opaque score.
+A **400-metre screening radius** was used to distinguish intersections with nearby cycling infrastructure from locations where the surrounding network appears relatively underserved.
 
-### Interpretation
+This threshold is a screening assumption rather than an engineering standard.
 
-High bicycle demand and limited nearby infrastructure can help the City decide where to look first. They cannot establish whether a bike lane is feasible or desirable. A site-level review would also need to consider road width, network continuity, parking and loading, collision history, planned projects, land use, and construction constraints.
+[INSERT MAP OF HIGH-BIKE INTERSECTIONS WITHOUT NEARBY INFRASTRUCTURE]
 
-Full implementation: [cycling infrastructure notebook](notebooks/01_cycling_infrastructure.ipynb)
+## Results
 
----
+[INSERT NUMBER] high-bicycle-demand intersections were identified for further infrastructure review.
 
-## Part 2: Traffic-signal operations screening
+The strongest candidates combine:
 
-### Question
+* high observed bicycle demand;
+* relatively large distance from existing cycling infrastructure; and
+* potential gaps in surrounding network connectivity.
 
-> Does the observed time-of-day demand profile appear consistent with the logic of the intersection's existing signal-control mode?
+### Example Candidates
 
-Toronto uses several control modes, including Fixed Time (FT), Semi-Actuated Type 1 (SA1), Semi-Actuated Type 2 (SA2), and Semi-Actuated Pedestrian (SAP). These modes provide different forms of regular, vehicle-actuated, and pedestrian-actuated service.
+| Intersection     | Bicycle Demand | Distance to Cycling Infrastructure | Interpretation   |
+| ---------------- | -------------: | ---------------------------------: | ---------------- |
+| [Intersection 1] |            [X] |                              [X m] | [Interpretation] |
+| [Intersection 2] |            [X] |                              [X m] | [Interpretation] |
+| [Intersection 3] |            [X] |                              [X m] | [Interpretation] |
 
-This analysis does **not** calculate an optimal signal mode. It screens for unusual demand patterns that may justify closer operational review.
+[INSERT 1–2 DETAILED EXAMPLE MAPS]
 
-### Data preparation
-
-The signal analysis combines:
-
-- multimodal turning-movement counts;
-- traffic-signal locations and control modes;
-- intersection coordinates; and
-- Toronto Centreline street geometry.
-
-These datasets were not designed to join cleanly. I standardized street names, matched signal side-street names to centreline records, and excluded unresolved cases rather than forcing uncertain matches. After cleaning, only about 3% of the street-name matches remained unresolved.
-
-### Inferring main- and side-street demand
-
-Traffic counts are reported by compass direction, while the signal data identify main and side streets by name. I therefore developed a geometry-based orientation procedure:
-
-1. match the named side street to Toronto Centreline;
-2. identify the centreline segment closest to the intersection;
-3. classify the local segment as mainly north-south or east-west; and
-4. use that orientation to aggregate directional counts into main- and side-street demand.
-
-Validation against north-south and east-west traffic volumes exposed approximately 140 ambiguous or incorrect classifications, which were corrected before the final analysis.
-
-[Insert diagram or map: side-street orientation procedure]
-
-Full implementation: [signal operations notebook](notebooks/02_signal_operations.ipynb)
+These locations should be interpreted as **candidates for infrastructure review, not automatic recommendations for bicycle-lane construction**.
 
 ---
 
-## Signal screening metrics
+# Part II: Traffic Signal Operations
 
-The metrics are interpreted together. They are not a mechanical classifier.
+## Question
 
-### Main-Street Dominance Index (K)
+> Does the observed demand pattern at an intersection appear consistent with the logic of its existing signal control mode?
 
-For each intersection, I first calculated directional imbalance in each observed time-of-day bin and then averaged across bins:
+Toronto operates intersections under several control modes, including **Fixed Time (FT), Semi-Actuated Type 1 (SA1), Semi-Actuated Type 2 (SA2), and Semi-Actuated Pedestrian (SAP)**.
 
-$$
-K=operatorname{mean}_t\left(\frac{Main_t-Side_t}{Main_t+Side_t}\right)
-$$
+Different modes provide different levels of demand responsiveness.
 
-| K value | Approximate interpretation |
-|---:|---|
-| 0 | Main and side demand are comparable |
-| 0.2 | Approximately 1.5:1 main-to-side demand |
-| 0.5 | Approximately 3:1 main-to-side demand |
-| High positive K | Strong main-street dominance |
-| Negative K | Side-street demand exceeds main-street demand |
+Instead of attempting to calculate an "optimal" control mode, this analysis asks whether observed multimodal demand appears broadly consistent with the operational logic of the existing mode.
 
-K is the backbone of the framework because it has an interpretable relationship to actual directional demand. Values such as 0.2 and 0.5 define useful screening regions; they are not presented as scientifically optimal conversion thresholds.
-
-### Dominance persistence
-
-An interval is treated as meaningfully main-street dominant when:
-
-$$
-Main_t \geq 1.5 \times Side_t
-$$
-
-Dominance persistence is the fraction of observed time bins satisfying this condition.
-
-In short:
-
-- **K** measures the magnitude of overall imbalance;
-- **persistence** measures how consistently meaningful dominance occurs during the observed period.
-
-### Side-street vehicle variability
-
-Side-street variability is measured with the coefficient of variation:
-
-$$
-CV_{side}=\frac{\sigma_{side}}{\mu_{side}}
-$$
-
-A higher CV indicates greater within-day variation relative to average side-street demand. It is supporting evidence for whether actuation could potentially respond to variable demand; it is not a standalone conversion rule.
-
-### Vehicle-pedestrian temporal correlation
-
-Pearson correlation between side-street vehicle and pedestrian demand describes whether the two forms of side service rise and fall together across the observed time profile.
-
-- high positive correlation: vehicle and pedestrian demand move together;
-- near zero: weak linear co-movement;
-- negative correlation: the two demands tend to occur at different times.
-
-This is a **temporal correlation**, not proof of operational overlap or causality.
-
-### Main-side vehicle temporal correlation
-
-Correlation between main- and side-street vehicle demand measures whether the two approaches follow similar time-of-day patterns. Low K combined with high main-side correlation provides additional evidence that regular service such as FT or SA1 may be reasonable.
+The resulting framework is therefore a **citywide screening tool**, not a traffic-engineering optimization model.
 
 ---
 
-## Screening logic by current mode
+## Data Preparation
 
-| Current mode | Observed pattern | Screening interpretation |
-|---|---|---|
-| SA2 | Low K and little dominance persistence | Main and side demand are comparable; review whether SA2 provides meaningful incremental benefit |
-| SA2 | High K | Strong main-street dominance is broadly consistent with SA2 |
-| FT / SA1 | Low K | Comparable approach demand supports regular service |
-| FT / SA1 | High, persistent main dominance | Actuation may deserve investigation |
-| FT / SA1 | Above + strong vehicle-pedestrian synchronization | SAP may deserve review if calls can remain coupled |
-| FT / SA1 | Above + weak or negative vehicle-pedestrian correlation | SA2 may deserve review if independent calls could add value |
-| SAP | Low K | Side demand may no longer behave as strongly secondary; FT/SA1 review |
-| SAP | High K + strong vehicle-pedestrian synchronization | Observed demand is broadly consistent with SAP |
-| SAP | High K + weak or negative vehicle-pedestrian correlation | Independent calls under SA2 may deserve review |
+This analysis required combining several datasets that were not originally designed to work together:
 
-The framework deliberately leaves the middle ambiguous. Its purpose is to identify strong exceptions, not force every intersection into a new mode.
+* multimodal intersection turning-movement counts;
+* traffic signal locations and control modes;
+* intersection coordinates; and
+* Toronto Centreline street geometries.
 
----
+Approximately **3,979 unique traffic-count intersections** were initially identified.
 
-## Signal results
+Traffic-count and signal datasets could not be matched perfectly because of differences in geographic coverage, coordinates, and street naming. Street names were cleaned and standardized where practical, while a small number of unresolved cases were excluded rather than forcing uncertain matches.
 
-### Most existing operations appeared plausible
+### Determining Main- and Side-Street Direction
 
-The most important result was not a large list of proposed changes. Most analyzed intersections did not produce strong, coherent evidence for review.
+The traffic-count dataset reports movements geographically as north, south, east, and west, while signal operation depends on **main-street versus side-street demand**.
 
-Many SA2 intersections showed clear main-street dominance, while many FT and SA1 intersections showed balanced volumes or continuously present side-street demand. Showing these cases is important because it demonstrates that the framework can validate existing operation rather than merely hunt for problems.
+To bridge these representations, I developed a geometric orientation procedure:
 
-[Insert example graph: FT/SA1 operation that appears reasonable]
+1. Match each signal's side-street name to Toronto Centreline data.
+2. Identify the centreline segment closest to the intersection.
+3. Calculate whether that local segment primarily runs north-south or east-west.
+4. Use that orientation to classify traffic-count movements as main- or side-street demand.
+5. Merge the resulting orientation lookup back into the full traffic-count dataset.
 
-[Insert example graph: SA2 operation that appears reasonable]
+[INSERT ORIENTATION DIAGRAM / MAP]
 
-### SA2 review group
-
-An initial screen identified **56 SA2 intersections with K below 0.5**. Visual review showed that the separation between main- and side-street demand generally increased with K, which supported using K as the primary citywide screening measure.
-
-Only **7 SA2 intersections had K below 0.2**. These became the strongest FT/SA1 review group because their main- and side-street demand was comparatively balanced:
-
-- Wintermute Blvd / Bamburgh Crcl
-- Finch Ave E / Middlefield Rd
-- Lonsdale Rd / Avenue Rd
-- Gardiner Expy E Park Lawn Rd Ramp / Mimico Cr...
-- Kipling Ave / Belfield Rd
-- Fairview Mall / Fairview Mall Dr / Hwy 404 S F...
-- DVP S Wynford Dr Ramp / Wynford Dr
-
-These cases require caution: the available counts cover only one to three observation dates at several locations.
-
-[Insert SA2 K distribution]
-
-[Insert low-K SA2 candidate graph]
-
-### FT and SA1 review candidates
-
-Low-K FT and SA1 intersections generally supported regular service. High K alone did not justify conversion because persistent side demand, corridor coordination, and implementation costs can make existing operation reasonable.
-
-The strongest SA2 review candidates combined persistent main-street dominance with weak or negative side-street vehicle-pedestrian temporal correlation.
-
-**FT examples**
-
-- King St E / Jarvis St
-- Lake Shore Blvd W / Long Branch Ave
-
-**SA1 examples**
-
-- Sorauren Ave / Dundas St W
-- Eglinton Ave W / Hwy 27 / Hwy 401 / Hwy 427...
-- Keele St / Canarctic Dr
-
-[Insert representative FT or SA1 candidate graph]
-
-### SAP review candidates
-
-Pharmacy Ave / Nancy Ave combined strong main-street dominance with strongly synchronized side-street vehicle and pedestrian demand, providing an example where existing SAP operation appeared consistent with the observed profile.
-
-The following high-K SAP intersections had weak or negative vehicle-pedestrian relationships and were identified for possible SA2 review:
-
-- Danforth Ave / Glebemount Ave
-- College St / Borden St
-- Pharmacy Ave / Gatineau Hydro Corridor Trl
-
-One unusually low-K SAP case—Gardiner Expy Express W Sherway Gardens Ramp / ...—was identified for FT/SA1 review.
-
-[Insert SAP-validating example and one SAP review candidate]
+Approximately 140 ambiguous or incorrectly classified cases were identified during validation by comparing directional traffic patterns and were corrected before the final analysis.
 
 ---
 
-## Limitations
+# Signal Screening Metrics
 
-### Traffic counts are snapshots
+Five complementary metrics describe the observed demand pattern.
 
-Many intersections have multiple intraday bins but only one or a small number of count dates. The metrics therefore describe the **observed within-day demand pattern**, not typical long-run traffic behaviour.
+## 1. Main-Street Dominance Index (K)
 
-The analysis cannot establish whether the patterns persist across weekdays, seasons, weather conditions, construction periods, or long-term changes in travel behaviour.
+The primary metric is:
 
-### Counts do not describe the full signal system
+```text
+K = mean_t[(Main_t - Side_t) / (Main_t + Side_t)]
+```
 
-The available data do not directly observe:
+where `Main_t` and `Side_t` represent observed main- and side-street vehicle demand during time interval `t`.
 
-- corridor coordination;
-- delay, queues, or level of service;
-- cycle lengths and splits;
-- detector condition or skipped-phase frequency;
-- transit priority or emergency-vehicle preemption;
-- collision history and safety constraints;
-- school, hospital, or accessibility requirements; or
-- implementation and maintenance costs.
+Interpretation:
 
-These omissions are why every flagged location is described as a **candidate for engineering review**, not a prescribed conversion.
+|               K | Approximate Demand Relationship               |
+| --------------: | --------------------------------------------- |
+|               0 | Main ≈ Side                                   |
+|             0.2 | ≈ 1.5:1                                       |
+|             0.5 | ≈ 3:1                                         |
+| High positive K | Strong main-street dominance                  |
+|      Negative K | Side-street demand exceeds main-street demand |
 
-### Cycling gaps require feasibility review
+K measures the **magnitude of directional imbalance**.
 
-The cycling screen measures observed demand and proximity to mapped infrastructure. It does not evaluate right-of-way, network design, planned projects, parking and loading needs, safety history, or construction feasibility.
-
----
-
-## Potential monitoring KPIs
-
-| KPI | Purpose |
-|---|---|
-| High-bike-demand intersections without nearby cycling infrastructure | Monitor possible cycling-network gaps |
-| Average observed 15-minute bicycle demand | Compare bicycle activity across unevenly sampled intersections |
-| Distance to nearest cycling infrastructure | Describe the scale of a potential network gap |
-| Main-Street Dominance Index (K) | Measure directional vehicle imbalance |
-| Dominance persistence | Measure how consistently meaningful dominance occurs |
-| Side-street vehicle CV | Describe relative within-day variability |
-| Vehicle-pedestrian temporal correlation | Describe synchronization of side-service demand |
-| Main-side vehicle temporal correlation | Describe similarity between approach demand profiles |
-| Intersections flagged for review | Prioritize detailed engineering investigation |
-
-These are screening KPIs, not engineering design standards.
+Rather than treating arbitrary percentiles as engineering thresholds, the analysis uses interpretable regions such as `K ≈ 0.2` and `K ≈ 0.5` to screen unusual demand relationships.
 
 ---
 
-## Tools and data
+## 2. Dominance Persistence
 
-**Python:** pandas, NumPy, GeoPandas, Matplotlib
+K describes average imbalance, but not whether that imbalance persists throughout the observed period.
 
-**Methods:** data cleaning, record linkage, spatial joins, buffers, nearest-neighbour distance, local street-orientation inference, time-of-day aggregation, coefficients of variation, and temporal correlations
+An interval is classified as meaningfully main-street dominant when:
 
-**City of Toronto datasets:**
+```text
+Main Vehicle Demand >= 1.5 × Side Vehicle Demand
+```
 
-- Multimodal Intersection Turning Movement Counts
-- Cycling Network
-- Traffic Signal Tabular Data
-- Toronto Centreline
+Dominance persistence is the proportion of observed time bins satisfying this condition.
 
-[Add exact dataset links]
+Therefore:
+
+**K = magnitude of imbalance**
+
+**Persistence = consistency of that imbalance**
 
 ---
 
-## Repository structure
+## 3. Side-Street Vehicle Variability
+
+Side-street demand variability is measured using the coefficient of variation:
+
+```text
+CV = Standard Deviation of Side Demand / Mean Side Demand
+```
+
+Higher CV indicates greater variation in side-street traffic relative to its average level.
+
+This metric provides supporting evidence when considering whether demand-responsive control could exploit variations in side-street demand. It is not treated as a standalone conversion criterion.
+
+---
+
+## 4. Vehicle-Pedestrian Temporal Correlation
+
+Pearson correlation is calculated between side-street vehicle and pedestrian demand across observed time-of-day bins.
+
+* **High positive correlation:** vehicle and pedestrian demand tend to increase and decrease together.
+* **Near zero:** little linear temporal relationship.
+* **Negative correlation:** vehicle and pedestrian demand tend to occur at different times.
+
+This metric helps distinguish situations where vehicle and pedestrian calls may reasonably remain coupled from situations where independent detection could potentially provide operational value.
+
+---
+
+## 5. Main-Side Vehicle Temporal Correlation
+
+Correlation between main- and side-street vehicle demand measures whether both approaches follow similar time-of-day patterns.
+
+For example:
+
+> Low K + high main-side correlation
+
+suggests not only comparable traffic volumes but also similar temporal demand patterns, providing additional evidence that regular service such as FT or SA1 may be reasonable.
+
+---
+
+# Signal-Control Screening Logic
+
+The metrics are interpreted together rather than as a mechanical classification algorithm.
+
+| Current Mode | Observed Pattern                                       | Screening Interpretation                                                                        |
+| ------------ | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| SA2          | Low K                                                  | Main and side demand are comparable; review whether SA2 provides meaningful incremental benefit |
+| SA2          | High K                                                 | Strong main-street dominance is broadly consistent with SA2                                     |
+| FT / SA1     | Low K                                                  | Comparable demand supports regular service                                                      |
+| FT / SA1     | High K + persistent dominance                          | Actuation may deserve review                                                                    |
+| FT / SA1     | Above + strong vehicle/pedestrian synchronization      | SAP may deserve review                                                                          |
+| FT / SA1     | Above + weak/negative vehicle/pedestrian relationship  | SA2 may deserve review                                                                          |
+| SAP          | Low K                                                  | Side service may no longer behave as strongly secondary; FT/SA1 review                          |
+| SAP          | High K + strong vehicle/pedestrian synchronization     | Observed demand is broadly consistent with SAP                                                  |
+| SAP          | High K + weak/negative vehicle/pedestrian relationship | Independent calls under SA2 may deserve review                                                  |
+
+These rules intentionally leave many intersections without a recommendation.
+
+The purpose is to identify **strong exceptions**, not force every intersection into a different operating mode.
+
+---
+
+# Results
+
+## Existing Operations Often Appear Reasonable
+
+One of the most important findings is that **most intersections do not produce strong evidence for a control-mode review**.
+
+Many SA2 intersections show clear main-street dominance, while many FT/SA1 intersections show relatively balanced demand patterns.
+
+This is useful evidence in itself: the framework is capable of validating existing operations rather than simply searching for anomalies.
+
+[INSERT EXAMPLE: FT/SA1 THAT CLEARLY MAKES SENSE]
+
+[INSERT EXAMPLE: SA2 THAT CLEARLY MAKES SENSE]
+
+---
+
+## SA2 Review Candidates
+
+Low-K SA2 intersections were treated as the primary review group because comparable main- and side-street demand weakens the observed demand-based rationale for highly responsive side-street service.
+
+The initial screening identified **56 SA2 intersections with K ≤ [THRESHOLD]**, with only **7 intersections below approximately K = 0.2**.
+
+[INSERT SA2 K DISTRIBUTION]
+
+[INSERT GOOD SA2 GRAPH]
+
+[INSERT LOW-K SA2 REVIEW CANDIDATE GRAPH]
+
+Example review candidates include:
+
+* Wintermute Blvd / Bamburgh Crcl
+* Finch Ave E / Middlefield Rd
+* Lonsdale Rd / Avenue Rd
+* Gardiner Expy E Park Lawn Rd Ramp / Mimico Cr...
+* Kipling Ave / Belfield Rd
+* Fairview Mall / Fairview Mall Dr / Hwy 404...
+* DVP S Wynford Dr Ramp / Wynford Dr
+
+These results require particular caution because several candidates contain traffic counts from only one to three observation dates.
+
+---
+
+## FT / SA1 Review Candidates
+
+Low-K FT and SA1 intersections generally provide reassuring evidence for regular service.
+
+For high-K intersections, additional metrics were used to distinguish cases where actuation might deserve investigation.
+
+Examples identified for SA2 review include:
+
+**FT**
+
+* King St E / Jarvis St
+* Lake Shore Blvd W / Long Branch Ave
+
+**SA1**
+
+* Sorauren Ave / Dundas St W
+* Eglinton Ave W / Hwy 27 / Hwy 401 / Hwy 427...
+* Keele St / Canarctic Dr
+
+[INSERT REPRESENTATIVE GRAPH]
+
+Several additional high-K intersections showed strongly synchronized side-street vehicle and pedestrian patterns and were therefore identified as possible SAP review candidates.
+
+---
+
+## SAP Review Candidates
+
+Most high-K SAP intersections showed demand relationships broadly consistent with their existing operation.
+
+One unusually low-K case was identified for FT/SA1 review:
+
+* Gardiner Expy Express W Sherway Gardens Ramp / [...]
+
+Several high-K intersections with weak or negative side-street vehicle-pedestrian temporal relationships were identified for SA2 review, including:
+
+* Danforth Ave / Glebemount Ave
+* College St / Borden St
+* Pharmacy Ave / Gatineau Hydro Corridor Trl
+
+Conversely, intersections such as **Pharmacy Ave / Nancy Ave** exhibited strong main-street dominance combined with synchronized side-street vehicle and pedestrian demand, providing an example where existing SAP operation appears consistent with the observed demand pattern.
+
+---
+
+# Key Findings
+
+The two analyses demonstrate how Toronto's existing open data can support **citywide screening before expensive site-level investigation**.
+
+### Cycling Infrastructure
+
+High bicycle demand can be combined with cycling-network proximity to identify locations where observed cycling activity and existing infrastructure appear misaligned.
+
+### Traffic Signal Operations
+
+A relatively small set of interpretable demand metrics can identify intersections whose observed time-of-day patterns appear unusual relative to the logic of their current control mode.
+
+Importantly, the analysis does **not** suggest widespread infrastructure or signal changes.
+
+Most analyzed intersections appear broadly plausible under their existing configuration. The strongest value of the framework is therefore its ability to narrow thousands of locations into a much smaller set deserving detailed review.
+
+---
+
+# Limitations
+
+## Traffic counts are observed snapshots
+
+Many intersections contain multiple 15-minute observations but only one or a small number of observation dates.
+
+The analysis therefore describes:
+
+> **observed within-day demand patterns**
+
+rather than long-run or typical traffic behavior.
+
+The data cannot establish whether these patterns persist across weekdays, seasons, weather conditions, construction periods, or longer-term changes in travel behavior.
+
+## Signal operations depend on factors not captured here
+
+Traffic counts alone cannot observe several important operational considerations, including:
+
+* corridor coordination;
+* actual delay and queue lengths;
+* cycle lengths and signal splits;
+* detector performance;
+* skipped-phase frequency;
+* transit priority;
+* emergency-vehicle preemption;
+* collision history;
+* school or hospital operations;
+* accessibility requirements; and
+* implementation and maintenance costs.
+
+For this reason, every output should be interpreted as a **candidate for engineering review**, not a prescribed signal conversion.
+
+## Cycling recommendations require additional feasibility analysis
+
+High bicycle demand and limited nearby infrastructure do not establish that a bicycle lane is feasible or desirable.
+
+Future analysis should incorporate road width, collision history, parking demand, network connectivity, land use, planned infrastructure, and construction constraints.
+
+---
+
+# Potential KPIs for the City
+
+The frameworks could be updated as new traffic counts become available.
+
+Potential monitoring KPIs include:
+
+| KPI                                                                  | Purpose                                        |
+| -------------------------------------------------------------------- | ---------------------------------------------- |
+| High-bike-demand intersections without nearby cycling infrastructure | Track potential cycling-network gaps           |
+| Main-Street Dominance Index (K)                                      | Track directional traffic imbalance            |
+| Dominance Persistence                                                | Measure consistency of directional imbalance   |
+| Side-Street Vehicle CV                                               | Track variation in side-street demand          |
+| Vehicle-Pedestrian Temporal Correlation                              | Measure synchronization of side-service demand |
+| Main-Side Vehicle Correlation                                        | Measure similarity of approach demand patterns |
+| Number of intersections flagged for review                           | Prioritize engineering investigation           |
+
+These indicators should be treated as **screening KPIs rather than engineering design standards**.
+
+---
+
+# Tools
+
+**Python**
+
+* pandas
+* NumPy
+* GeoPandas
+* Matplotlib
+
+**Geospatial Analysis**
+
+* Coordinate reference system transformation
+* Spatial joins
+* Distance/buffer analysis
+* Toronto Centreline geometry
+* Local street-orientation inference
+
+**Data Sources**
+
+* City of Toronto Open Data
+* Multimodal Intersection Turning Movement Counts
+* Traffic Signal Tabular Data
+* Toronto Cycling Network
+* Toronto Centreline
+
+[ADD EXACT DATASET LINKS]
+
+---
+
+# Project Structure
 
 ```text
 Toronto-Urban-Mobility/
-├── README.md
+│
+├── data/
+│   └── [describe raw/processed data availability]
+│
 ├── notebooks/
 │   ├── 01_cycling_infrastructure.ipynb
-│   └── 02_signal_operations.ipynb
+│   └── 02_signal_optimization.ipynb
+│
 ├── figures/
 │   ├── cycling/
 │   └── signals/
-└── data/
-    └── README.md
+│
+├── src/
+│   └── [optional reusable functions]
+│
+└── README.md
 ```
 
-Large raw datasets can be excluded from the repository and documented in `data/README.md` with download links and expected filenames.
+---
 
-## Conclusion
+# Conclusion
 
-The two analyses answer the same practical question at different levels of Toronto's transportation system:
+This project demonstrates how public transportation data can be transformed from disconnected datasets into practical **decision-support screening tools**.
 
-> Given thousands of locations and limited engineering resources, where should the City look first?
+The cycling analysis identifies locations where high observed bicycle demand may not be matched by nearby cycling infrastructure.
 
-The cycling analysis narrows the network to intersections where high observed bicycle demand is not matched by nearby mapped infrastructure. The signal analysis identifies intersections whose observed vehicle and pedestrian demand patterns appear unusual relative to their current operating mode.
+The traffic-signal analysis evaluates whether observed main-street, side-street, vehicle, and pedestrian demand patterns appear broadly consistent with existing control modes.
 
-Neither tool replaces engineering judgment. Their value is in turning disconnected public datasets into transparent, interpretable shortlists for more detailed review.
+Neither framework attempts to replace transportation engineering judgment.
 
+Instead, they answer a more realistic data-analytics question:
+
+> **Given thousands of locations and limited engineering resources, where should the City look first?**
