@@ -295,6 +295,7 @@ The initial screening identified **56 SA2 intersections with K ≤ 0.5**, with o
 
 K < 0.2 was selected as an empirical screening threshold to identify SA2 intersections with unusually balanced main- and side-street demand. it acts as a conservative criterion for identifying intersections warranting further review. Supplementary time-of-day plots support this threshold visually, showing a noticeable decline in main-street dominance as K approaches 0.2
 
+<p align="center"><img width="800" alt="Finch_Middlefield" src="https://github.com/user-attachments/assets/edbf9fb2-4ef9-4eac-9b7b-9a3de5d50a00" /></p>
 
 Review candidates include:
 
@@ -307,7 +308,6 @@ Review candidates include:
 * DVP S Wynford Dr Ramp / Wynford Dr
 
 These results require particular caution because several candidates contain traffic counts from only one to three observation dates.
-<p align="center"><img width="600" alt="Finch_Middlefield" src="https://github.com/user-attachments/assets/edbf9fb2-4ef9-4eac-9b7b-9a3de5d50a00" /></p>
 
 ---
 
