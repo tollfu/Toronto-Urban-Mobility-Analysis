@@ -102,14 +102,17 @@ The strongest candidates combine:
 
 These locations should be interpreted as **candidates for infrastructure review, not automatic recommendations for bicycle-lane construction**.
 
-### Key Takeaway
+### Key Takeaways
 
-In my final results, Spadina Ave / Dundas St W along with a few other Spadina Ave intersections stand out as a potential infrastructure gap: relatively high bicycle demand is observed despite the intersections being near 500 m away from a bike lane.
+* **Spadina Ave** shows as a potential cycling infrastructure gap. Spadina Ave / Dundas St W, along with several other Spadina intersections, records relatively high bicycle demand despite being approximately 500 m from the nearest mapped cycling infrastructure. However, the presence of streetcar infrastructure may hinder potential cycling improvements. Further feasibility assessment is recommended.
 
-Queen S E / Broadview Ave shows, like Spadina Ave / Dunas St W, has no bike lane and a city
+* **Queen St E / Broadview Ave** demonstrate a similar combination of high bicycle demand and limited nearby cycling infrastructure. Like Spadina, current streetcar operations may complicate the implementation of dedicated cycling facilities.
 
-This does not necessarily imply that a new bike lane should be constructed. Instead, the result identifies Spadina Avenue as a candidate corridor for further safety, feasibility, and infrastructure assessment.
----
+* **Isabella St / Church St** also observes high bicycle demand without nearby dedicated cycling infrastructure, but does not face the same streetcar constraint. This makes it a potentially stronger candidate for further assessment of bike-lane implementation.
+
+* Among intersections in the **top 20% of bicycle demand**, locations along **Kingston Rd** and **St Clair Ave W** are among the furthest from existing cycling infrastructure. While St Clair Ave W is constrained by streetcar infrastructure, Kingston Rd does not share this constraint, making it worthy of further investigation.
+
+Overall, the analysis identifies several high-demand intersections where observed bicycle use is not matched by nearby dedicated infrastructure. These findings provide a data-driven checklist for further safety, feasibility, and network-connectivity assessment rather than definitive recommendations for bike-lane construction.
 
 # Part II: Traffic Signal Operations
 
