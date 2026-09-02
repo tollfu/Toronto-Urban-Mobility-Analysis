@@ -1,5 +1,3 @@
-<img width="3567" height="1768" alt="Finch_Middlefield" src="https://github.com/user-attachments/assets/683042cd-2a53-4093-a694-23bd34ffb00f" />
-<img width="3567" height="1768" alt="Finch_Middlefield" src="https://github.com/user-attachments/assets/f8b8bd37-f50b-4896-bb1a-ba4bd4d52a69" />
 # Toronto Urban Mobility Analysis
 
 ## Overview
@@ -309,6 +307,7 @@ Review candidates include:
 * DVP S Wynford Dr Ramp / Wynford Dr
 
 These results require particular caution because several candidates contain traffic counts from only one to three observation dates.
+<p align="center"><img width="600" alt="Finch_Middlefield" src="https://github.com/user-attachments/assets/edbf9fb2-4ef9-4eac-9b7b-9a3de5d50a00" /></p>
 
 ---
 
