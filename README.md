@@ -42,7 +42,7 @@ I therefore aggregated observations to create a comparable measure of bicycle de
 
 ### 1. Estimate bicycle demand
 
-For each intersection, bicycle movements were aggregated across directions and observation periods to estimate average observed bicycle traffic.
+For each intersection, bicycle movements were aggregated across directions and observation periods to estimate average observed bicycle traffic per 15 minutes, as this is the timeframe for each obervation bin.
 
 ```python
 intersection_d["bike_count"] = intersection_d["n_appr_bike"]+intersection_d["s_appr_bike"]+intersection_d["e_appr_bike"]+intersection_d["w_appr_bike"]
