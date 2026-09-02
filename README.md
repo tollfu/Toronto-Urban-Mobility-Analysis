@@ -144,7 +144,7 @@ This analysis asks whether observed multimodal demand appears broadly consistent
 
 ## Data Preparation
 
-This analysis required combining several datasets that were not originally designed to work together:
+The combination of several datasets that were not originally designed to work together are required for this analysis:
 
 * multimodal intersection turning-movement counts;
 * traffic signal locations and control modes;
@@ -167,7 +167,6 @@ To bridge these interpretations, I developed a geometric orientation procedure:
 4. Use that orientation to classify traffic-count movements as main- or side-street demand.
 5. Merge the resulting orientation lookup back into the full traffic-count dataset.
 
-[INSERT ORIENTATION DIAGRAM / MAP]
 
 Approximately 140 ambiguous or incorrectly classified cases were identified during validation by comparing directional traffic patterns and were corrected before the final analysis.
 
@@ -232,13 +231,13 @@ Pearson correlation is calculated between side-street vehicle and pedestrian dem
 * **Near zero:** little linear temporal relationship.
 * **Negative correlation:** vehicle and pedestrian demand tend to occur at different times.
 
-This metric helps distinguish situations where vehicle and pedestrian calls may reasonably remain coupled from situations where independent detection could potentially provide operational value.
+This metric helps distinguish situations where vehicle and pedestrian calls may be reasonably coupled from situations where independent detection could potentially provide more operational value.
 
 ---
 
 ## 4. Main-Side Vehicle Temporal Correlation
 
-Correlation between main- and side-street vehicle demand measures whether both approaches follow similar time-of-day patterns.
+Pearson Correlation between main- and side-street vehicle demand, this measures whether both approaches follow similar time-of-day patterns.
 
 For example:
 
