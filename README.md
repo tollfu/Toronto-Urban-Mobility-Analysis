@@ -30,7 +30,7 @@ The analysis combines:
 
 * **Multimodal Intersection Turning Movement Counts** 
 * **Toronto Cycling Network**
-* Intersection coordinates and geospatial information
+* **Intersection coordinates and geospatial information**
 
 The traffic-count dataset contains 15-minute observations of vehicle, pedestrian, and bicycle movements through Toronto intersections.
 
