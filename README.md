@@ -96,8 +96,8 @@ The strongest candidates combine:
 | Intersection     | Average 15-min Bicycle Demand| Distance to Cycling Infrastructure |
 | ---------------- | -------------: | ---------------------------------: |
 | Spadina Ave / Dundas St W |            49 |                              486 m | 
-| [Intersection 2] |            [X] |                              [X m] | 
-| [Isabella St / Church St] |            22 |                              419 m | 
+| Queen St E / Broadview Ave |            23 |                              516 m | 
+| Isabella St / Church St |            22 |                              419 m | 
 
 
 These locations should be interpreted as **candidates for infrastructure review, not automatic recommendations for bicycle-lane construction**.
