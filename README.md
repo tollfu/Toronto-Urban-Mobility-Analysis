@@ -50,6 +50,7 @@ The analysis focuses on approximately the **top 20% of observed bicycle-demand i
 <p align="center">
 <img width="635" height="132" alt="image" src="https://github.com/user-attachments/assets/9495e7a4-9a31-4aa0-858a-11cbc21307f1" />
 <p/>
+  
 ### 2. Map the cycling network
 
 Intersection coordinates and Toronto cycling-network geometries were converted into GeoDataFrames.
@@ -88,8 +89,7 @@ This threshold is a screening assumption rather than an engineering standard.
 The strongest candidates combine:
 
 * high observed bicycle demand;
-* relatively large distance from existing cycling infrastructure; and
-* potential gaps in surrounding network connectivity.
+* relatively large distance from existing cycling infrastructure
 
 ### Example Candidates
 
@@ -102,6 +102,13 @@ The strongest candidates combine:
 
 These locations should be interpreted as **candidates for infrastructure review, not automatic recommendations for bicycle-lane construction**.
 
+### Key Takeaway
+
+In my final results, Spadina Ave / Dundas St W along with a few other Spadina Ave intersections stand out as a potential infrastructure gap: relatively high bicycle demand is observed despite the intersections being near 500 m away from a bike lane.
+
+Queen S E / Broadview Ave shows, like Spadina Ave / Dunas St W, has no bike lane and a city
+
+This does not necessarily imply that a new bike lane should be constructed. Instead, the result identifies Spadina Avenue as a candidate corridor for further safety, feasibility, and infrastructure assessment.
 ---
 
 # Part II: Traffic Signal Operations
