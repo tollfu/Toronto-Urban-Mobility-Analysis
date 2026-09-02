@@ -93,13 +93,11 @@ The strongest candidates combine:
 
 ### Example Candidates
 
-| Intersection     | Average 15-min Bicycle Demand| Distance to Cycling Infrastructure | Interpretation   |
-| ---------------- | -------------: | ---------------------------------: | ---------------- |
-| Spadina Ave / Dundas St W |            49 |                              486 m | High-cycling-volume intersections are concentrated primarily in Toronto's central area, where cycling infrastructure is also relatively dense. However, several high-volume intersections appear outside or between existing cycling routes. Spadina Avenue is a notable example, suggesting a potential mismatch between observed cycling demand and dedicated cycling infrastructure.
-
-These locations should not automatically be interpreted as requiring new bike lanes, but they provide a data-driven shortlist of corridors for further safety, feasibility, and infrastructure assessment.|
-| [Intersection 2] |            [X] |                              [X m] | [Interpretation] |
-| [Intersection 3] |            [X] |                              [X m] | [Interpretation] |
+| Intersection     | Average 15-min Bicycle Demand| Distance to Cycling Infrastructure |
+| ---------------- | -------------: | ---------------------------------: |
+| Spadina Ave / Dundas St W |            49 |                              486 m | 
+| [Intersection 2] |            [X] |                              [X m] | 
+| [Isabella St / Church St] |            22 |                              419 m | 
 
 
 These locations should be interpreted as **candidates for infrastructure review, not automatic recommendations for bicycle-lane construction**.
