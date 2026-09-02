@@ -408,25 +408,7 @@ High bicycle demand and limited nearby infrastructure do not establish that a bi
 
 Future analysis should incorporate road width, collision history, parking demand, network connectivity, land use, planned infrastructure, and construction constraints.
 
----
 
-# Potential KPIs for the City
-
-The frameworks could be updated as new traffic counts become available.
-
-Potential monitoring KPIs include:
-
-| KPI                                                                  | Purpose                                        |
-| -------------------------------------------------------------------- | ---------------------------------------------- |
-| High-bike-demand intersections without nearby cycling infrastructure | Track potential cycling-network gaps           |
-| Main-Street Dominance Index (K)                                      | Track directional traffic imbalance            |
-| Dominance Persistence                                                | Measure consistency of directional imbalance   |
-| Side-Street Vehicle CV                                               | Track variation in side-street demand          |
-| Vehicle-Pedestrian Temporal Correlation                              | Measure synchronization of side-service demand |
-| Main-Side Vehicle Correlation                                        | Measure similarity of approach demand patterns |
-| Number of intersections flagged for review                           | Prioritize engineering investigation           |
-
-These indicators should be treated as **screening KPIs rather than engineering design standards**.
 
 ---
 
