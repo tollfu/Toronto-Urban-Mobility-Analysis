@@ -84,9 +84,9 @@ This threshold is a screening assumption rather than an engineering standard.
 
 The strongest candidates combine:
 
-* high observed bicycle demand;
-* relatively large distance from existing cycling infrastructure;
-* 
+* high observed bicycle demand
+* relatively large distance from existing cycling infrastructure
+* limited obvious physical or operational constraints to implementation
 
 ### Example Candidates
 
@@ -359,25 +359,13 @@ Several high-K intersections with weak or negative side-street vehicle-pedestria
 
 ---
 
-# Key Findings
-
-The two analyses demonstrate how Toronto's existing open data can support **citywide screening before expensive site-level investigation**.
-
-### Cycling Infrastructure
-
-High bicycle demand can be combined with cycling-network proximity to identify locations where observed cycling activity and existing infrastructure appear misaligned.
-
-### Traffic Signal Operations
-
-A relatively small set of interpretable demand metrics can identify intersections whose observed time-of-day patterns appear unusual relative to the logic of their current control mode.
-
-Importantly, the analysis does **not** suggest widespread infrastructure or signal changes.
-
-Most analyzed intersections appear broadly plausible under their existing configuration. The strongest value of the framework is therefore its ability to narrow thousands of locations into a much smaller set deserving detailed review.
-
----
-
 # Limitations
+
+## Cycling recommendations require additional feasibility analysis
+
+High bicycle demand and limited nearby infrastructure do not establish that a bicycle lane is feasible or desirable.
+
+Future analysis should incorporate road width, collision history, parking demand, network connectivity, land use, planned infrastructure, and construction constraints.
 
 ## Traffic counts are observed snapshots
 
@@ -395,27 +383,19 @@ The data cannot establish whether these patterns persist across weekdays, season
 
 Traffic counts alone cannot observe several important operational considerations, including:
 
-* corridor coordination;
-* actual delay and queue lengths;
-* cycle lengths and signal splits;
-* detector performance;
-* skipped-phase frequency;
-* transit priority;
-* emergency-vehicle preemption;
-* collision history;
-* school or hospital operations;
-* accessibility requirements; and
-* implementation and maintenance costs.
+* corridor coordination
+* actual delay and queue lengths
+* cycle lengths and signal splits
+* detector performance
+* skipped-phase frequency
+* transit priority
+* emergency-vehicle preemption
+* collision history
+* school or hospital operations
+* accessibility requirements
+* implementation and maintenance costs
 
-For this reason, every output should be interpreted as a **candidate for engineering review**, not a prescribed signal conversion.
-
-## Cycling recommendations require additional feasibility analysis
-
-High bicycle demand and limited nearby infrastructure do not establish that a bicycle lane is feasible or desirable.
-
-Future analysis should incorporate road width, collision history, parking demand, network connectivity, land use, planned infrastructure, and construction constraints.
-
-
+For this reason, every output should only be interpreted as a **candidate for engineering review**, not a prescribed signal conversion.
 
 ---
 
@@ -460,4 +440,4 @@ Neither framework attempts to replace transportation engineering judgment.
 
 Instead, they answer a more realistic data-analytics question:
 
-> **Given thousands of locations and limited engineering resources, where should the City look first?**
+> **Given thousands of locations and limited engineering resources, where should the City look at first?**
