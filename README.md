@@ -16,6 +16,8 @@ The objective is not to prescribe infrastructure or signal changes directly. Ins
 
 # Part I: Cycling Infrastructure Screening
 
+[Full Python Workflow](data_source/cycling_lane_analysis.ipynb)
+
 ## Question
 
 > Which high-bicycle-demand intersections currently lack nearby cycling infrastructure?
@@ -112,6 +114,8 @@ These locations should be interpreted as **candidates for infrastructure review,
 Overall, the analysis identifies several high-demand intersections where observed bicycle use is not matched by nearby dedicated infrastructure. These findings provide a data-driven checklist for further safety, feasibility, and network-connectivity assessment rather than definitive recommendations for bike-lane construction.
 
 # Part II: Traffic Signal Operations
+
+[Full Python Workflow](data_source/signal_change.ipynb)
 
 ## Question
 
@@ -417,14 +421,13 @@ For this reason, every output should only be interpreted as a **candidate for en
 * Local street-orientation inference
 
 **Data Sources**
-
-* City of Toronto Open Data
-* Multimodal Intersection Turning Movement Counts
-* Traffic Signal Tabular Data
-* Toronto Cycling Network
-* Toronto Centreline
-
 Source: [City of Toronto Open Data](https://open.toronto.ca/catalogue/?topics=Transportation)
+
+* [Multimodal Intersection Turning Movement Counts](data_source/tmc_raw_data_2020_2029.csv.zip)
+* [Traffic Signal Tabular Data](data_source/Traffic_Signal_4326.csv)
+* [Toronto Cycling Network](data_source/cycling-network-4326.csv)
+* [Toronto Centreline](data_source/Centreline.csv)
+
 
 ---
 
@@ -441,3 +444,4 @@ Neither framework attempts to replace transportation engineering judgment.
 Instead, they answer a more realistic data-analytics question:
 
 > **Given thousands of locations and limited engineering resources, where should the City look at first?**
+  [Full Signal Screening Results](results/signal_recommendations.csv)
