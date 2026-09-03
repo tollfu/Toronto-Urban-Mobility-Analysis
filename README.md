@@ -341,19 +341,17 @@ Several additional high-K intersections showed strongly synchronized side-street
 
 ## SAP Review Candidates
 
-Most high-K SAP intersections showed demand relationships broadly consistent with their existing operation.
+Most high-K SAP intersections showed demand relationships broadly consistent with their existing operation. Intersections such as **Pharmacy Ave / Nancy Ave** exhibited strong main-street dominance combined with synchronized side-street vehicle and pedestrian demand, providing an example where existing SAP operation appears consistent with the observed demand pattern.
 
 One unusually low-K case was identified for FT/SA1 review:
 
-* Gardiner Expy Express W Sherway Gardens Ramp / [...]
+* Gardiner Expy Express W Sherway Gardens Ramp / Sherway Gardens Rd
 
 Several high-K intersections with weak or negative side-street vehicle-pedestrian temporal relationships were identified for SA2 review, including:
 
 * Danforth Ave / Glebemount Ave
 * College St / Borden St
 * Pharmacy Ave / Gatineau Hydro Corridor Trl
-
-Conversely, intersections such as **Pharmacy Ave / Nancy Ave** exhibited strong main-street dominance combined with synchronized side-street vehicle and pedestrian demand, providing an example where existing SAP operation appears consistent with the observed demand pattern.
 
 ---
 
