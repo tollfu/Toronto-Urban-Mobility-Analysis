@@ -133,12 +133,12 @@ Toronto operates intersections under several control modes, including **Fixed Ti
 | **SAP** | Side street activates when either a vehicle or pedestrian is detected | ✅ | ✅ |
 | **SA1** | Vehicle phases may be actuated, while pedestrian phases remain on recall | ✅ | ❌ |
 | **SA2** | Side-street timing responds independently to vehicle and pedestrian demand | ✅ | ✅ |
-| **SAV** | No pedestriann crossings, side street is activated and extended by vehicle demand only | - | - |
+| **SAV** | No pedestrian crossings, side street is activated and extended by vehicle demand only | - | - |
 | **PED** | Midblock pedestrian signal, crossing is activated by a pedestrian pushbutton | - | - |
 
 Different modes provide different levels of demand responsiveness.
 
-This analysis asks whether observed multimodal demand appears broadly consistent with the operational logic of the existing mode. Hence, the resulting framework is therefore a **citywide screening tool**, and not a traffic-engineering optimization model.
+This analysis asks whether observed multimodal demand appears broadly consistent with the operational logic of the existing mode. Hence, the resulting framework is a **citywide screening tool**, and not a traffic-engineering optimization model.
 
 ---
 
@@ -240,7 +240,7 @@ This metric helps distinguish situations where vehicle and pedestrian calls may 
 
 ## 4. Main-Side Vehicle Temporal Correlation
 
-Pearson correlation between main- and side-street vehicle demand, this measures whether both approaches follow similar time-of-day patterns.
+Pearson correlation between main- and side-street vehicle demand measures whether both approaches follow similar time-of-day patterns.
 
 For example:
 
@@ -296,7 +296,7 @@ The initial screening identified **56 SA2 intersections with K ≤ 0.5**, with o
 
 K < 0.2 was selected as an empirical screening threshold to identify SA2 intersections with unusually balanced main- and side-street demand. It acts as a conservative criterion for identifying intersections warranting further review. Supplementary time-of-day plots support this threshold visually, showing a noticeable decline in main-street dominance as K approaches 0.2
 
-The graph below captures average main-side street vehicle demand of **Finch Ave E / Middlefield Rd** throughout the day. We confirm both numerically and visually that main street exhibits no dominance and mains-side vehicle demand shares high correlation, making it a strong candidate for recall signal mode review (**FT/SA1**).
+The graph below captures average main-side street vehicle demand of **Finch Ave E / Middlefield Rd** throughout the day. We confirm both numerically and visually that main street exhibits no dominance and main-side vehicle demand shares high correlation, making it a strong candidate for recall signal mode review (**FT/SA1**).
 
 <p align="center"><img width="800" alt="Finch_Middlefield" src="https://github.com/user-attachments/assets/edbf9fb2-4ef9-4eac-9b7b-9a3de5d50a00" /></p>
 
@@ -443,5 +443,5 @@ Neither framework attempts to replace transportation engineering judgment.
 
 Instead, they answer a more realistic data-analytics question:
 
-> **Given thousands of locations and limited engineering resources, where should the City look at first?**
+> **Given thousands of locations and limited engineering resources, where should the City look first?**
   [Full Signal Screening Results](signal_recommendations.csv)
