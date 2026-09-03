@@ -42,7 +42,7 @@ I therefore aggregated observations to create a comparable measure of bicycle de
 
 ### 1. Estimate bicycle demand
 
-For each intersection, bicycle movements were aggregated across directions and observation periods to estimate average observed bicycle traffic per 15 minutes, as this is the timeframe for each obervation bin.
+For each intersection, bicycle movements were aggregated across directions and observation periods to estimate average observed bicycle traffic per 15 minutes, as this is the timeframe for each observation.
 
 Intersections were then ranked based on bicycle demand.
 
@@ -103,7 +103,7 @@ These locations should be interpreted as **candidates for infrastructure review,
 
 * **Spadina Ave** shows as a potential cycling infrastructure gap. Spadina Ave / Dundas St W, along with several other Spadina intersections, records relatively high bicycle demand despite being approximately 500 m from the nearest mapped cycling infrastructure. However, the presence of streetcar infrastructure may hinder potential cycling improvements. Further feasibility assessment is recommended.
 
-* **Queen St E / Broadview Ave** demonstrate a similar combination of high bicycle demand and limited nearby cycling infrastructure. Like Spadina, current streetcar operations may complicate the implementation of dedicated cycling facilities.
+* **Queen St E / Broadview Ave** demonstrates a similar combination of high bicycle demand and limited nearby cycling infrastructure. Like Spadina, current streetcar operations may complicate the implementation of dedicated cycling facilities.
 
 * **Isabella St / Church St** also observes high bicycle demand without nearby dedicated cycling infrastructure, but does not face the same streetcar constraint. This makes it a potentially stronger candidate for further assessment of bike-lane implementation.
 
@@ -129,8 +129,8 @@ Toronto operates intersections under several control modes, including **Fixed Ti
 | **SAP** | Side street activates when either a vehicle or pedestrian is detected | ✅ | ✅ |
 | **SA1** | Vehicle phases may be actuated, while pedestrian phases remain on recall | ✅ | ❌ |
 | **SA2** | Side-street timing responds independently to vehicle and pedestrian demand | ✅ | ✅ |
-| **SAV** | No pedestrain crossings, side street is activated and extended by vehicle demand only | - | - |
-| **PED** | Midblock pedestrain signal, crossing is activated by a pedestrian pushbutton | - | - |
+| **SAV** | No pedestriann crossings, side street is activated and extended by vehicle demand only | - | - |
+| **PED** | Midblock pedestrian signal, crossing is activated by a pedestrian pushbutton | - | - |
 
 Different modes provide different levels of demand responsiveness.
 
@@ -236,7 +236,7 @@ This metric helps distinguish situations where vehicle and pedestrian calls may 
 
 ## 4. Main-Side Vehicle Temporal Correlation
 
-Pearson Correlation between main- and side-street vehicle demand, this measures whether both approaches follow similar time-of-day patterns.
+Pearson correlation between main- and side-street vehicle demand, this measures whether both approaches follow similar time-of-day patterns.
 
 For example:
 
@@ -290,9 +290,9 @@ Low-K SA2 intersections were treated as the primary review group because compara
 
 The initial screening identified **56 SA2 intersections with K ≤ 0.5**, with only **7 intersections below approximately K = 0.2**.
 
-K < 0.2 was selected as an empirical screening threshold to identify SA2 intersections with unusually balanced main- and side-street demand. it acts as a conservative criterion for identifying intersections warranting further review. Supplementary time-of-day plots support this threshold visually, showing a noticeable decline in main-street dominance as K approaches 0.2
+K < 0.2 was selected as an empirical screening threshold to identify SA2 intersections with unusually balanced main- and side-street demand. It acts as a conservative criterion for identifying intersections warranting further review. Supplementary time-of-day plots support this threshold visually, showing a noticeable decline in main-street dominance as K approaches 0.2
 
-The below graph captures average main-side street vehicle demnad of **Finch Ave E / Middlefield Rd** throughout the day. We confirm both numerically and visually that main street exhibits no dominance and mains-side vehicle demand shares high correlation, making it a strong candidate for recall signal mode review (**FT/SA1**) .
+The graph below captures average main-side street vehicle demand of **Finch Ave E / Middlefield Rd** throughout the day. We confirm both numerically and visually that main street exhibits no dominance and mains-side vehicle demand shares high correlation, making it a strong candidate for recall signal mode review (**FT/SA1**).
 
 <p align="center"><img width="800" alt="Finch_Middlefield" src="https://github.com/user-attachments/assets/edbf9fb2-4ef9-4eac-9b7b-9a3de5d50a00" /></p>
 
@@ -334,7 +334,7 @@ Examples identified for SA2 review include:
 | King St E / Jarvis St | King St E | Jarvis St | FT | 0.685 | 1.000  | -0.122 | -0.525 |
 | Sorauren Ave / Dundas St W | Sorauren Ave | Dundas St W | SA1 | 0.753 | 1.000 | -0.087 | 0.435 |
 
-In above example chart, both intersections show strong and persistent main-street dominance, while side-street vehicle and pedestrian demand are negatively correlated. This suggests side-street vehicle and pedestrian demand may occur at different times, making them good candidates for SA2 review. However, the 15-minute count intervals are not fine-grained enough to confirm whether these movements overlap within individual signal cycles; cycle-level data would be required for a more definitive assessment.
+In the example chart above, both intersections show strong and persistent main-street dominance, while side-street vehicle and pedestrian demand are negatively correlated. This suggests side-street vehicle and pedestrian demand may occur at different times, making them good candidates for SA2 review. However, the 15-minute count intervals are not fine-grained enough to confirm whether these movements overlap within individual signal cycles; cycle-level data would be required for a more definitive assessment.
 
 Several additional high-K intersections showed strongly synchronized side-street vehicle and pedestrian patterns and were therefore identified as possible SAP review candidates.
 
