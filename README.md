@@ -158,7 +158,7 @@ At intersections with two differently named side streets, both approaches were t
 
 The traffic-count dataset reports movements geographically as north, south, east, and west, while signal operation at intersections depends on **main-street versus side-street demand**.
 
-To bridge these interpretations, I developed a geometric orientation procedure:
+To bridge these interpretations, I developed a **geometric orientation procedure**:
 
 1. Match each signal's side-street name to Toronto Centreline data.
 2. Identify the centreline segment closest to the intersection.
