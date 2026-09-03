@@ -328,7 +328,12 @@ Examples identified for SA2 review include:
 * Eglinton Ave W / Hwy 27 / Hwy 401 / Hwy 427...
 * Keele St / Canarctic Dr
 
-[INSERT REPRESENTATIVE GRAPH]
+| Location | Main Street | Side Street | Control Mode | K | Persistence | Side Street Vehicle-Pedestrian Correlation | Main–Side Street Vehicle Correlation |
+|---|---|---|:---:|---:|---:|---:|---:|
+| King St E / Jarvis St | King St E | Jarvis St | FT | 0.685 | 1.000  | -0.122 | -0.525 |
+| Sorauren Ave / Dundas St W | Sorauren Ave | Dundas St W | SA1 | 0.753 | 1.000 | -0.087 | 0.435 |
+
+In above example chart, both intersections show strong and persistent main-street dominance, while side-street vehicle and pedestrian demand are negatively correlated. This suggests side-street vehicle and pedestrian demand may occur at different times, making them good candidates for SA2 review. However, the 15-minute count intervals are not fine-grained enough to confirm whether these movements overlap within individual signal cycles; cycle-level data would be required for a more definitive assessment.
 
 Several additional high-K intersections showed strongly synchronized side-street vehicle and pedestrian patterns and were therefore identified as possible SAP review candidates.
 
