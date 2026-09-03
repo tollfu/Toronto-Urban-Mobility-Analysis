@@ -343,6 +343,9 @@ Several additional high-K intersections showed strongly synchronized side-street
 
 Most high-K SAP intersections showed demand relationships broadly consistent with their existing operation. Intersections such as **Pharmacy Ave / Nancy Ave** exhibited strong main-street dominance combined with synchronized side-street vehicle and pedestrian demand, providing an example where existing SAP operation appears consistent with the observed demand pattern.
 
+<p align="center"><img width="800" alt="Pharmacy_Nancy" src="https://github.com/user-attachments/assets/077ee36c-1f8b-42b1-a412-d5df8aa93ea2" /></p>
+
+
 One unusually low-K case was identified for FT/SA1 review:
 
 * Gardiner Expy Express W Sherway Gardens Ramp / Sherway Gardens Rd
