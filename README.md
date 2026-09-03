@@ -444,31 +444,7 @@ Future analysis should incorporate road width, collision history, parking demand
 * Toronto Cycling Network
 * Toronto Centreline
 
-[ADD EXACT DATASET LINKS]
-
----
-
-# Project Structure
-
-```text
-Toronto-Urban-Mobility/
-│
-├── data/
-│   └── [describe raw/processed data availability]
-│
-├── notebooks/
-│   ├── 01_cycling_infrastructure.ipynb
-│   └── 02_signal_optimization.ipynb
-│
-├── figures/
-│   ├── cycling/
-│   └── signals/
-│
-├── src/
-│   └── [optional reusable functions]
-│
-└── README.md
-```
+Source:https://open.toronto.ca/catalogue/?topics=Transportation
 
 ---
 
