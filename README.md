@@ -275,7 +275,7 @@ Many SA2 intersections show clear main-street dominance, while many FT/SA1 inter
 
 This is useful evidence in itself: the framework is capable of validating existing operations rather than simply searching for anomalies.
 
-| Location | Main Street | Side Street | Control Mode | K | Persistence | Side Vehicle–Pedestrian Overlap | Main–Side Correlation |
+| Location | Main Street | Side Street | Control Mode | K | Persistence | Side Street Vehicle-Pedestrian Correlation | Main–Side Street Vehicle Correlation |
 |---|---|---|:---:|---:|---:|---:|---:|
 | Rusholme Rd / Lisgar St / Dundas St W | Dundas St W | Lisgar St | SA2 | 0.998 | 1.000  | -0.170 | 0.053 |
 | Victoria Park Ave / McNicoll Ave | VICTORIA PARK AVE | MCNICOLL AVE | FT | 0.044 | 0.000 | 0.396 | 0.953 |
