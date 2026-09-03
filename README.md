@@ -326,7 +326,7 @@ Examples identified for SA2 review include:
 **SA1**
 
 * Sorauren Ave / Dundas St W
-* Eglinton Ave W / Hwy 27 / Hwy 401 / Hwy 427...
+* Eglinton Ave W / Hwy 27 / Hwy 401 / Hwy 427 Eglinton E Ramp
 * Keele St / Canarctic Dr
 
 | Location | Main Street | Side Street | Control Mode | K | Persistence | Side Street Vehicle-Pedestrian Correlation | Main–Side Street Vehicle Correlation |
