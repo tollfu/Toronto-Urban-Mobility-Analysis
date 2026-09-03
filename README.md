@@ -30,7 +30,7 @@ The analysis combines:
 
 * **Multimodal Intersection Turning Movement Counts** 
 * **Toronto Cycling Network**
-* **Intersection coordinates and geospatial information**
+* **Intersection Coordinates and Geospatial Information**
 
 The traffic-count dataset contains 15-minute observations of vehicle, pedestrian, and bicycle movements through Toronto intersections.
 
@@ -142,10 +142,11 @@ This analysis asks whether observed multimodal demand appears broadly consistent
 
 The combination of several datasets that were not originally designed to work together are required for this analysis:
 
-* multimodal intersection turning-movement counts;
-* traffic signal locations and control modes;
-* intersection coordinates; and
-* Toronto Centreline street geometries.
+* **Multimodal Intersection Turning Movement Counts**
+* **Traffic Signal Locations and Control Modes**
+* **Intersection Coordinates**
+* **Toronto Centreline Street Geometries**
+
 
 Approximately **3,979 unique traffic-count intersections** were initially identified.
 
