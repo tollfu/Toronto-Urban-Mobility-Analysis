@@ -444,7 +444,7 @@ Future analysis should incorporate road width, collision history, parking demand
 * Toronto Cycling Network
 * Toronto Centreline
 
-Source: [City of Toronto Open Data]([https://open.toronto.ca/](https://open.toronto.ca/catalogue/?topics=Transportation)
+Source: [City of Toronto Open Data](https://open.toronto.ca/catalogue/?topics=Transportation)
 
 ---
 
