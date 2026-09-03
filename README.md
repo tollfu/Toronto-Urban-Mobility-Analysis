@@ -423,10 +423,10 @@ For this reason, every output should only be interpreted as a **candidate for en
 **Data Sources**
 Source: [City of Toronto Open Data](https://open.toronto.ca/catalogue/?topics=Transportation)
 
-* [Multimodal Intersection Turning Movement Counts](data_source/tmc_raw_data_2020_2029.csv.zip)
+* [Multimodal Intersection Turning Movement Counts](data_source/tmc_raw_data_2020_2029.zip)
 * [Traffic Signal Tabular Data](data_source/Traffic_Signal_4326.csv)
 * [Toronto Cycling Network](data_source/cycling-network-4326.csv)
-* [Toronto Centreline](data_source/Centreline.csv.zip)
+* [Toronto Centreline](data_source/Centreline.zip)
 
 
 ---
